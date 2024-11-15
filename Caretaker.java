@@ -1,16 +1,18 @@
 import java.util.ArrayList;
 
 public class Caretaker {
-    // donde todos los mementos son guardados
-    ArrayList<Memento> savedArticles = new ArrayList<Memento>();
+    //Donde todos los mementos(estados) son guardados
+    ArrayList<Memento> textoGuardado = new ArrayList<Memento>();
 
-    // agrega memento a la ArrayList
+    //Agrega memento al ArrayList
     public void addMemento(Memento m) {
-        savedArticles.add(m);
+        //System.out.println("\nse agrega memento al arreglo\n");
+        textoGuardado.add(m);
     }
 
-    // regresa el memento deseado del ArrayList
+    //obtener el memento deseado del ArrayList
     public Memento getMemento(int index) {
-        return savedArticles.get(index);
+        //System.out.println("\nse regresa el ultimo memento agregado al arreglo\n");
+        return textoGuardado.get(index);
     }
 }

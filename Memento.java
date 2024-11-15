@@ -1,13 +1,15 @@
 public class Memento {
-    // el doc es almacenado en un objeto memento
-    private String article;
+    //El texto es almacenado en un objeto memento
+    private String estadoTexto;
 
-    // guardar un nuevo doc String a un objeto memento
-    public Memento(String articleSave) {
-        article = articleSave;
+    //Guardar un nuevo String(texto) a un objeto memento
+    public Memento(String estadoTexto) {
+        //System.out.println("\nestado(memento)\n");
+        this.estadoTexto = estadoTexto;
     }
 
-    public String getSavedArticle() {
-        return article;
+    public String getEstadoTexto() {
+        //System.out.println("\nobtener estado");
+        return estadoTexto;
     }
 }

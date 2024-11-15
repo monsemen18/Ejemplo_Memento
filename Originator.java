@@ -1,23 +1,23 @@
 public class Originator {
-    private String article;
+    private String texto;
 
-    // asigna el valor para el articulo
-    public void set(String newArticle) {
-        System.out.println("En Originador: versión actual\n" + newArticle + "\n");
-        this.article = newArticle;
+    //Asigna el texto
+    public void set(String newTexto) {
+        System.out.println("\nEn Originador: estado actual\n" + newTexto + "\n");
+        this.texto = newTexto;
     }
 
-    // crea un nuevo memento con un nuevo articulo
-    public Memento storeInMemento() {
-        System.out.println("En Originador: guardando a Memento");
-        return new Memento(article);
+    //Crea un nuevo memento con un nuevo texto
+    public Memento guardarEnMemento() {
+        System.out.println("En Originador: guardando a Memento\n");
+        return new Memento(texto);
     }
 
-    // regresa el articulo que actualmente esta guardado en Memento
-    public String restoreFromMemento(Memento memento) {
-        article = memento.getSavedArticle();
-        System.out.println("De Originador: Articulo previo guardado en Memento" + article + "\n");
-        return article;
+    //Regresa el texto que actualmente esta guardado en Memento
+    public String restaurarDeMemento(Memento memento) {
+        texto = memento.getEstadoTexto();
+        System.out.println("De Originador: texto previo guardado en Memento\n" + texto + "\n");
+        return texto;
     }
 
 }
