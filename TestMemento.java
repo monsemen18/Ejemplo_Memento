@@ -3,6 +3,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class TestMemento extends JFrame {
     public static void main(String[] args) {
@@ -34,7 +36,7 @@ public class TestMemento extends JFrame {
 
         // Agregar JTextArea en el centro
         JPanel textPanel = new JPanel();
-        textPanel.add(areaTexto);
+        textPanel.add(new JScrollPane(areaTexto));
         this.add(textPanel, BorderLayout.CENTER);
 
         // Panel para los botones, centrados en la parte inferior
@@ -46,6 +48,7 @@ public class TestMemento extends JFrame {
 
         botonGuardar = new JButton("Guardar");
         botonGuardar.addActionListener(accionGuardar);
+        botonGuardar.setEnabled(false); // Deshabilitar el botón inicialmente
 
         botonDeshacer = new JButton("Deshacer");
         botonDeshacer.addActionListener(accionDeshacer);
@@ -60,7 +63,26 @@ public class TestMemento extends JFrame {
         // Agregar el panel de botones en la parte inferior
         this.add(buttonPanel, BorderLayout.SOUTH);
 
+        // Agregar DocumentListener al área de texto
+        areaTexto.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                actualizarEstadoBotonGuardar();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                actualizarEstadoBotonGuardar();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                actualizarEstadoBotonGuardar();
+            }
+        });
+
         this.setVisible(true);
+    }
+
+    private void actualizarEstadoBotonGuardar() {
+        botonGuardar.setEnabled(!areaTexto.getText().trim().isEmpty());
     }
 
     class Controlador implements ActionListener {
@@ -73,6 +95,7 @@ public class TestMemento extends JFrame {
                 textoActual++;
                 System.out.println("texto " + textoGuardado + " guardado");
                 System.out.println("-------------------------------------------------------------");
+                botonGuardar.setEnabled(false); // Deshabilitar el botón después de guardar
                 botonDeshacer.setEnabled(true);
             } else if (e.getSource() == botonDeshacer) {
                 if (textoActual >= 1) {
@@ -80,6 +103,7 @@ public class TestMemento extends JFrame {
                     String textoEnCuadro = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
                     areaTexto.setText(textoEnCuadro);
                     botonRehacer.setEnabled(true);
+                    botonGuardar.setEnabled(false);
                 } else {
                     botonDeshacer.setEnabled(false);
                 }
@@ -89,6 +113,7 @@ public class TestMemento extends JFrame {
                     String textoEnCuadro = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
                     areaTexto.setText(textoEnCuadro);
                     botonDeshacer.setEnabled(true);
+                    botonGuardar.setEnabled(false);
                 } else {
                     botonRehacer.setEnabled(false);
                 }
@@ -96,3 +121,4 @@ public class TestMemento extends JFrame {
         }
     }
 }
+

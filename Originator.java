@@ -16,7 +16,7 @@ public class Originator {
     //Regresa el texto que actualmente esta guardado en Memento
     public String restaurarDeMemento(Memento memento) {
         texto = memento.getTextoGuardado();
-        System.out.println("De Originador: texto previo guardado en Memento\n" + texto + "\n");
+        //System.out.println("De Originador: texto previo guardado en Memento\n" + texto + "\n");
         return texto;
     }
 
