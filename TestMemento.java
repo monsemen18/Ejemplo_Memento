@@ -16,7 +16,7 @@ public class TestMemento extends JFrame {
     Caretaker caretaker = new Caretaker();
     Originator originator = new Originator();
 
-    int saveFiles = 0;
+    int textoGuardado = 0;
     int textoActual = 0;
 
     public TestMemento() {
@@ -66,28 +66,28 @@ public class TestMemento extends JFrame {
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == botonGuardar) {
-                String textInTextArea = areaTexto.getText();
-                originator.set(textInTextArea);
-                caretaker.addMemento(originator.guardarEnMemento());
-                saveFiles++;
+                String textoEnTextArea = areaTexto.getText();
+                originator.set(textoEnTextArea);
+                caretaker.addMemento(originator.crearMemento());
+                textoGuardado++;
                 textoActual++;
-                System.out.println("texto " + saveFiles + " guardado");
+                System.out.println("texto " + textoGuardado + " guardado");
                 System.out.println("-------------------------------------------------------------");
                 botonDeshacer.setEnabled(true);
             } else if (e.getSource() == botonDeshacer) {
                 if (textoActual >= 1) {
                     textoActual--;
-                    String textBoxString = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
-                    areaTexto.setText(textBoxString);
+                    String textoEnCuadro = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
+                    areaTexto.setText(textoEnCuadro);
                     botonRehacer.setEnabled(true);
                 } else {
                     botonDeshacer.setEnabled(false);
                 }
             } else if (e.getSource() == botonRehacer) {
-                if ((saveFiles - 1) > textoActual) {
+                if ((textoGuardado - 1) > textoActual) {
                     textoActual++;
-                    String textBoxString = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
-                    areaTexto.setText(textBoxString);
+                    String textoEnCuadro = originator.restaurarDeMemento(caretaker.getMemento(textoActual));
+                    areaTexto.setText(textoEnCuadro);
                     botonDeshacer.setEnabled(true);
                 } else {
                     botonRehacer.setEnabled(false);
