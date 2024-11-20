@@ -1,7 +1,7 @@
 public class Originator {
     private String texto;
 
-    //Asigna el texto
+    //Produce/asigna el texto
     public void set(String nuevoTexto) {
         System.out.println("\nEn Originador: estado actual\n" + nuevoTexto + "\n");
         this.texto = nuevoTexto;
@@ -21,3 +21,4 @@ public class Originator {
     }
 
 }
+

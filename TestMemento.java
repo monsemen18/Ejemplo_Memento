@@ -40,18 +40,18 @@ public class TestMemento extends JFrame {
         // Panel para los botones, centrados en la parte inferior
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        ButtonListener saveListener = new ButtonListener();
-        ButtonListener undoListener = new ButtonListener();
-        ButtonListener redoListener = new ButtonListener();
+        Controlador accionGuardar = new Controlador();
+        Controlador accionDeshacer = new Controlador();
+        Controlador accionRehacer = new Controlador();
 
         botonGuardar = new JButton("Guardar");
-        botonGuardar.addActionListener(saveListener);
+        botonGuardar.addActionListener(accionGuardar);
 
         botonDeshacer = new JButton("Deshacer");
-        botonDeshacer.addActionListener(undoListener);
+        botonDeshacer.addActionListener(accionDeshacer);
 
         botonRehacer = new JButton("Rehacer");
-        botonRehacer.addActionListener(redoListener);
+        botonRehacer.addActionListener(accionRehacer);
 
         buttonPanel.add(botonGuardar);
         buttonPanel.add(botonDeshacer);
@@ -63,7 +63,7 @@ public class TestMemento extends JFrame {
         this.setVisible(true);
     }
 
-    class ButtonListener implements ActionListener {
+    class Controlador implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == botonGuardar) {
                 String textoEnTextArea = areaTexto.getText();
